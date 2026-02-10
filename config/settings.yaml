@@ -1,0 +1,51 @@
+# 系统配置
+system:
+  # 循环执行间隔（分钟）
+  interval: 30
+  # 验证码识别失败重试次数
+  max_retry: 5
+  # 日志级别: DEBUG, INFO, WARNING, ERROR
+  log_level: INFO
+
+# URL配置
+urls:
+  workorder:
+    base: "https://gd.anyserves56.com"
+    login: "/index.php/Public/login.html"
+    captcha: "/index.php/Public/getImgCode.html"
+    export: "/index.php/Order/exportorder.html"
+    index: "/index.php/Order/order/status/120.html"
+  
+  asd:
+    base: "https://www.anyserves56.com"
+    login: "/wms-web/security/login"
+    query_sn: "/wms-web/rfweb/rfController/querySoSkuBySn"
+    save_order: "/wms-web/rfweb/rfController/saveWmsSoOrder"
+    query_pick: "/wms-web/rfweb/rfController/WMSRF_PK_QueryPickDetail"
+    pick: "/wms-web/rfweb/rfController/pickBySnCode"
+  
+  logistics:
+    base: "https://www.anyserves56.com"
+    login: "/wms-web/security/login"
+    collect: "/wms-web/oubweb/outboundSoController/collectSoOrderGroupByStatus.shtml"
+    query: "/wms-web/oubweb/outboundSoController/query.shtml"
+    shipment: "/wms-web/oubweb/outboundShippmentController/shipmentByAllocListNew.shtml"
+
+# 加密配置
+encryption:
+  iv: "dongjunyaoguoqip"
+  key_prefix: "asd0"
+  key_suffix: "bjsf"
+
+# 文件路径配置
+paths:
+  cookies: "./data/cookies/cookies.json"
+  captcha: "./data/cookies/captcha.png"
+  user_machine_csv: "./data/files/用户机已完单.csv"
+  user_board_csv: "./data/files/用户板已完单.csv"
+  inbound_sn: "./data/files/inbound_sn.txt"
+  log: "./logs/app.log"
+
+# 查询日期范围配置（天）
+date_range:
+  days_back: 29
