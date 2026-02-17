@@ -253,6 +253,31 @@ paths:
   # ...
 ```
 
+## 部署到服务器
+
+### 快速部署（Docker）
+
+```bash
+# 1. 上传到服务器，进入项目目录
+cd workorder-automation
+
+# 2. 配置环境变量
+cp .env.example .env
+nano .env  # 填入配置
+
+# 3. 启动
+docker-compose up -d
+```
+
+### 详细部署文档
+
+查看 [DEPLOY.md](DEPLOY.md) 获取：
+- Docker 部署方案
+- Systemd 服务部署
+- Supervisor 部署
+- 服务器配置要求
+- 常见问题排查
+
 ## 使用方法
 
 ### 1. 安装依赖
@@ -332,15 +357,13 @@ automation.run_once()  # 单次执行
    - 使用FastAPI提供REST接口
    - 支持远程触发和查询
 
-4. **容器化**
-   ```dockerfile
-   FROM python:3.11-slim
-   WORKDIR /app
-   COPY requirements.txt .
-   RUN pip install -r requirements.txt
-   COPY . .
-   CMD ["python", "main.py"]
-   ```
+4. **~~容器化~~** ✅ 已完成
+   - 提供 Dockerfile 和 docker-compose.yml
+   - 支持一键部署
+
+5. **~~异常通知~~** ✅ 已完成
+   - 集成 PushPlus 微信通知
+   - 登录失败、系统异常自动告警
 
 ## 许可证
 

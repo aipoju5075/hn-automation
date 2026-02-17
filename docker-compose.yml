@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  workorder-automation:
+    build: .
+    container_name: workorder-automation
+    restart: unless-stopped
+    
+    # 环境变量
+    environment:
+      # 工单系统
+      - WORKORDER_USERNAME=${WORKORDER_USERNAME}
+      - WORKORDER_PASSWORD=${WORKORDER_PASSWORD}
+      
+      # ASD系统
+      - ASD_USERNAME=${ASD_USERNAME}
+      - ASD_PASSWORD=${ASD_PASSWORD}
+      
+      # 物流系统
+      - LOGISTICS_USERNAME=${LOGISTICS_USERNAME}
+      - LOGISTICS_PASSWORD=${LOGISTICS_PASSWORD}
+      
+      # 自提人员
+      - SELF_PICKUP_STAFF=${SELF_PICKUP_STAFF}
+      
+      # 百度OCR
+      - BAIDU_OCR_API_KEY=${BAIDU_OCR_API_KEY}
+      - BAIDU_OCR_SECRET_KEY=${BAIDU_OCR_SECRET_KEY}
+      
+      # PushPlus通知
+      - PUSHPLUS_TOKEN=${PUSHPLUS_TOKEN}
+      - PUSHPLUS_ENABLED=${PUSHPLUS_ENABLED:-true}
+      
+      # 时区
+      - TZ=Asia/Shanghai
+    
+    # 数据持久化
+    volumes:
+      # 日志目录
+      - ./logs:/app/logs
+      # 数据文件
+      - ./data:/app/data
+      # 配置文件（可选，如果需要外部修改配置）
+      - ./config:/app/config
+    
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # 资源限制（根据服务器调整）
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M

@@ -49,3 +49,12 @@ paths:
 # 查询日期范围配置（天）
 date_range:
   days_back: 29
+
+# 通知配置（PushPlus）
+notification:
+  # 是否启用通知
+  enabled: true
+  # PushPlus Token（从环境变量读取，此处仅作占位）
+  token: ""
+  # 消息标题前缀
+  title_prefix: "工单系统"

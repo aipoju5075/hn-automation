@@ -58,6 +58,13 @@ class Config:
         if os.getenv("SELF_PICKUP_STAFF"):
             staff_list = [s.strip() for s in os.getenv("SELF_PICKUP_STAFF").split(",")]
             self._config.setdefault("business", {})["self_pickup_staff"] = staff_list
+        
+        # PushPlus 通知配置
+        pushplus_token = os.getenv("PUSHPLUS_TOKEN")
+        if pushplus_token:
+            self._config.setdefault("notification", {})
+            self._config["notification"]["token"] = pushplus_token
+            self._config["notification"]["enabled"] = os.getenv("PUSHPLUS_ENABLED", "true").lower() == "true"
     
     def get(self, key: str, default: Any = None) -> Any:
         """
@@ -103,6 +110,11 @@ class Config:
     def self_pickup_staff(self) -> List[str]:
         """自提人员列表"""
         return self._config.get("business", {}).get("self_pickup_staff", [])
+    
+    @property
+    def notification(self) -> Dict[str, Any]:
+        """通知配置"""
+        return self._config.get("notification", {})
 
 
 # 全局配置实例
