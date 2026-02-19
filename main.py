@@ -290,11 +290,11 @@ class WorkOrderAutomation:
             duration = (end_time - start_time).total_seconds()
             self.logger.info(f"============ {end_time} 执行完成，耗时 {duration:.2f} 秒 ============")
             # 发送每日汇总通知（可选，根据需求决定是否启用）
-            self.notifier.send_daily_summary(
-                user_machine_stats=stats["user_machine"],
-                user_board_stats=stats["user_board"],
-                duration=duration
-            )
+            # self.notifier.send_daily_summary(
+            #     user_machine_stats=stats["user_machine"],
+            #     user_board_stats=stats["user_board"],
+            #     duration=duration
+            # )
             
             return True
             
